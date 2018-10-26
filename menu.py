@@ -20,15 +20,18 @@ def MENU():
     tela.blit(fundo, (9, 4))
 
     while Sair:
+
         pygame.display.update()
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 Sair = False
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
                     tela.fill(branco)
-                    fundo = pygame.image.load('img/quarto.png')
+                    fundo = pygame.image.load('img/quarto.PNG')
                     tela.blit(fundo, (0, 0))
                 if event.key == pygame.K_ESCAPE:
                     Sair = False
+
     pygame.quit()
