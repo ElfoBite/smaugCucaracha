@@ -1,15 +1,19 @@
 import pygame
 
 class Personagem(object):
+
     x = 0
     y = 0
     largura = 60
     altura = 25
     moveX = 0
     moveY = 0
+    velocidade = 5
+
     ativo = pygame.image.load('img/Cockroach Type 1 Color 1 Move 1.png')
     direita = pygame.transform.scale(ativo, (largura, altura))
     esquerda = pygame.transform.flip(direita, True, False)
+
     ativo = pygame.image.load('img/Cockroach2Move1.png')
     cima = pygame.transform.scale(ativo, (altura, largura))
     baixo = pygame.transform.flip(cima, False, True)
@@ -21,22 +25,22 @@ class Personagem(object):
         self.y = largura/2
 
     def AndaDireita(self):
-        self.moveX = 1
+        self.moveX = self.velocidade
         self.moveY = 0
         self.ativo = self.direita
 
     def AndaEsquerda(self):
-        self.moveX = -1
+        self.moveX = -(self.velocidade)
         self.moveY = 0
         self.ativo = self.esquerda
 
     def AndaCima(self):
-        self.moveY = -1
+        self.moveY = -(self.velocidade)
         self.moveX = 0
         self.ativo = self.cima
 
     def AndaBaixo(self):
-        self.moveY = 1
+        self.moveY = self.velocidade
         self.moveX = 0
         self.ativo = self.baixo
 
@@ -58,3 +62,10 @@ class Personagem(object):
 
     def rect(self):
         return pygame.Rect((self.x, self.y), self.ativo.get_size())
+
+    def TestaMuro(self, muros):
+
+        for muro in muros:
+            if self.rect().colliderect(muro):
+                self.x -= self.moveX * 2
+                self.y -= self.moveY * 2
