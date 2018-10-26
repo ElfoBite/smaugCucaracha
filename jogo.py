@@ -1,6 +1,7 @@
 import pygame
 from personagem import Personagem
 
+
 teste = ((1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
          (1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1),
          (1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1),
@@ -43,8 +44,7 @@ def MainLooping():
     except:
         print("pygame não iniciado")
 
-
-
+    fps = pygame.time.Clock()
     tela = pygame.display.set_mode((telaLargura,telaAltura),pygame.DOUBLEBUF,32)
 
     sair = True
@@ -69,12 +69,8 @@ def MainLooping():
         personagem.x += personagem.moveX
         personagem.y += personagem.moveY
         personagem.TestaLimiteDaTela(telaLargura, telaAltura)
-        rectPersonagem = personagem.rect()
+        personagem.TestaMuro(muros)
 
-        for muro in muros:
-            if rectPersonagem.colliderect(muro):
-                personagem.x -= personagem.moveX * 2
-                personagem.y -= personagem.moveY * 2
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -99,7 +95,7 @@ def MainLooping():
                     personagem.ParaY()
                 if event.key == pygame.K_DOWN:
                     personagem.ParaY()
-
+        fps.tick(60)
         pygame.display.update()
 
     pygame.quit()
