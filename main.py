@@ -1,7 +1,7 @@
 from menu import TelaInicial, Menu
 from jogo import Jogar
 
-estado =
+estado = 0
 
 while True:
     print(estado)

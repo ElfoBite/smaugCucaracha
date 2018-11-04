@@ -17,7 +17,9 @@ pygame.mixer.music.play(-1)
 tela.blit(fundo, (9, 4))
 
 
+
 def TelaInicial():
+    pygame.mixer.music.play(-1)
     while True:
 
         pygame.display.update()
@@ -43,4 +45,5 @@ def Menu():
                 pygame.quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
+                    pygame.quit()
                     return 2
