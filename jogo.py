@@ -29,7 +29,7 @@ teste = ((1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
 
 
 
-def MainLooping():
+def Jogar():
 
     branco = (255, 255, 255)
     preto = (0, 0, 0)
@@ -47,9 +47,8 @@ def MainLooping():
     fps = pygame.time.Clock()
     tela = pygame.display.set_mode((telaLargura,telaAltura),pygame.DOUBLEBUF,32)
 
-    sair = True
 
-    while sair:
+    while True:
 
         tela.fill(branco)
         x, y = 0, 0
@@ -74,8 +73,7 @@ def MainLooping():
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                sair = False
-
+                return 6
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
                     personagem.AndaEsquerda()
