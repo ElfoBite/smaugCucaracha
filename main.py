@@ -1,5 +1,11 @@
+import pygame
 from menu import TelaInicial, Menu
 from jogo import Jogar
+
+try:
+    pygame.init()
+except:
+    print("O modulo pygame não foi iniciado com sucesso")
 
 estado = 0
 

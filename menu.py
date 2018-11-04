@@ -4,10 +4,7 @@ titulo = "Carrera de la Cucaracha"
 largura = 800
 altura = 600
 branco = (255,255,255)
-try:
-    pygame.init()
-except:
-    print("O modulo pygame não foi iniciado com sucesso")
+
 pygame.display.set_caption(titulo)
 fundo = pygame.image.load('img/fundo.png')
 tela = pygame.display.set_mode((largura, altura), 0, 32)
@@ -45,5 +42,5 @@ def Menu():
                 pygame.quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    pygame.quit()
+                    pygame.mixer_music.stop()
                     return 2

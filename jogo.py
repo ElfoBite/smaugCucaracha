@@ -39,11 +39,6 @@ def Jogar():
 
     personagem = Personagem(telaLargura, telaAltura)
 
-    try:
-        pygame.init()
-    except:
-        print("pygame não iniciado")
-
     fps = pygame.time.Clock()
     tela = pygame.display.set_mode((telaLargura,telaAltura),pygame.DOUBLEBUF,32)
 
