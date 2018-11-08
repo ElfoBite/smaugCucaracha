@@ -5,21 +5,27 @@ largura = 800
 altura = 600
 branco = (255,255,255)
 
+pygame.init()
+
 pygame.display.set_caption(titulo)
-fundo = pygame.image.load('img/fundo.png')
 tela = pygame.display.set_mode((largura, altura), 0, 32)
 pygame.mixer.music.load('Sons/La-Cucaracha.mp3')
-pygame.mixer.music.play(-1)
+fundo = pygame.image.load('img/fundo.png')
 
-tela.blit(fundo, (9, 4))
-
-
+def ajustaimagem(img):
+    global largura, altura, fundo
+    fundo = pygame.image.load(img)
+    fundo = pygame.transform.scale(fundo, (largura, altura))
 
 def TelaInicial():
+    global fundo
     pygame.mixer.music.play(-1)
+    ajustaimagem('img/fundo.png')
+
     while True:
 
         pygame.display.update()
+        tela.blit(fundo, (0, 0))
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -28,19 +34,33 @@ def TelaInicial():
                 if event.key == pygame.K_RETURN:
                     return 1
 def Menu():
-
-    tela.fill(branco)
-    fundo = pygame.image.load('img/quarto.PNG')
-    tela.blit(fundo, (0, 0))
+    global fundo
+    pygame.mixer.music.play(-1)
+    ajustaimagem('img/quarto.PNG')
 
     while True:
-
+        tela.blit(fundo, (0, 0))
         pygame.display.update()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_1:
+                    pygame.mixer_music.stop()
+                    return 2
+                if event.key == pygame.K_2:
+                    return 4
+def Loja():
 
+    global fundo
+    ajustaimagem('img/loja.png')
+
+    while True:
+        tela.blit(fundo, (0, 0))
+        pygame.display.update()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    pygame.mixer_music.stop()
-                    return 2
+                    return 1

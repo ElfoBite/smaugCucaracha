@@ -1,5 +1,5 @@
 import pygame
-from menu import TelaInicial, Menu
+from menu import TelaInicial, Menu, Loja
 from jogo import Jogar
 
 try:
@@ -21,8 +21,7 @@ while True:
         pass
         #configuração
     elif estado == 4:
-        pass
-        #Loja
+        estado = Loja()
     elif estado == 5:
         pass
         #Pause

@@ -60,12 +60,17 @@ class Personagem(object):
         if self.y > altura - self.largura:
             self.y = altura - self.largura
 
+
     def rect(self):
         return pygame.Rect((self.x, self.y), self.ativo.get_size())
 
     def TestaMuro(self, muros):
-
         for muro in muros:
             if self.rect().colliderect(muro):
                 self.x -= self.moveX * 2
                 self.y -= self.moveY * 2
+
+    def TestaMaca(self,maca):
+            if self.rect().colliderect(maca):
+                return 1
+            return 0
