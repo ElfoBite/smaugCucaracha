@@ -29,20 +29,20 @@ teste = [[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
          [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1]]
 
 maca = pygame.image.load('img/maca.jpg')
-maca = pygame.transform.scale(maca, (40, 40))
+maca = pygame.transform.scale(maca, (35, 35))
 s = 0
 
 def MudaMaca():
     global s
     s = 0
-    y = 0
+    x = 0
     for i in teste:
-        x = 0
+        y = 0
         for j in i:
             if j == 2:
-                teste[y][x] = 0
-            x += 1
-        y += 1
+                teste[x][y] = 0
+            y += 1
+        x += 1
 
     sair = True
 
@@ -91,7 +91,6 @@ def Jogar():
                     muros.append(pygame.Rect(x, y, (telaAltura / teste.__len__()), (telaLargura / i.__len__())))
 
                 if j == 2:
-
                     macaRect = pygame.Rect(x, y, 40, 40)
                     tela.blit(maca, (x, y))
 
