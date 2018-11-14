@@ -20,7 +20,7 @@ teste = [[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
          [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1],
          [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1],
-         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1,  1],
          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1],
          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
@@ -31,11 +31,40 @@ teste = [[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
 maca = pygame.image.load('img/maca.jpg')
 maca = pygame.transform.scale(maca, (40, 40))
 s = 0
+muros = []
+x, y = 0, 0
+macaRect = pygame.Rect(0, 0, 0, 0)
+yMaca = 0
+xMaca = 0
+
+telaLargura = 1024
+telaAltura = 768
+
+tileX = telaLargura / 32
+tileY = telaAltura / 23
+
+personagem = Personagem(telaLargura, telaAltura)
+
+fps = pygame.time.Clock()
+tela = pygame.display.set_mode((telaLargura, telaAltura), pygame.DOUBLEBUF, 32)
+fundo = pygame.image.load('Cenarios/fase1.png')
+fundo = pygame.transform.scale(fundo, (telaLargura, telaAltura))
+
+for i in teste:
+    x = 0
+    for j in i:
+        if not (muros):
+            if j == 1:
+                muros.append(pygame.Rect(x, y, tileX, tileY))
+        x += tileX
+    y += tileY
+
 
 def MudaMaca():
-    global s
+    global s, maca, macaRect, yMaca, xMaca, tela
     s = 0
     y = 0
+
     for i in teste:
         x = 0
         for j in i:
@@ -51,22 +80,11 @@ def MudaMaca():
         xMaca = random.randint(0,31)
         if teste[yMaca][xMaca] == 0:
             teste[yMaca][xMaca] = 2
+            macaRect = pygame.Rect(xMaca * tileX, yMaca * tileY, tileX, tileY)
             sair = False
 
 def Jogar():
-    global s
-    branco = (255, 255, 255)
-    preto = (0, 0, 0)
-
-    telaLargura = 1024
-    telaAltura = 768
-
-    personagem = Personagem(telaLargura, telaAltura)
-
-    fps = pygame.time.Clock()
-    tela = pygame.display.set_mode((telaLargura,telaAltura),pygame.DOUBLEBUF,32)
-    fundo = pygame.image.load('Cenarios/fase1.png')
-    fundo = pygame.transform.scale(fundo, (telaLargura, telaAltura))
+    global s, tela, personagem, personagem, maca, yMaca, xMaca, macaRect
     s = 600
 
 
@@ -76,27 +94,9 @@ def Jogar():
         segundo = s/60
 
         tela.blit(fundo, (0, 0))
-
+        tela.blit(maca, (xMaca * tileX, yMaca * tileY))
         if segundo >= 10:
             MudaMaca()
-
-        x, y = 0, 0
-        muros = []
-        macaRect = pygame.Rect(0, 0, 0, 0)
-
-        for i in teste:
-            x = 0
-            for j in i:
-                if j == 1:
-                    muros.append(pygame.Rect(x, y, (telaAltura / teste.__len__()), (telaLargura / i.__len__())))
-
-                if j == 2:
-
-                    macaRect = pygame.Rect(x, y, 40, 40)
-                    tela.blit(maca, (x, y))
-
-                x += telaAltura / teste.__len__()
-            y += telaLargura / i.__len__()
 
         tela.blit(personagem.ativo, (personagem.x, personagem.y))
         personagem.x += personagem.moveX
@@ -104,6 +104,7 @@ def Jogar():
         personagem.TestaLimiteDaTela(telaLargura, telaAltura)
         personagem.TestaMuro(muros)
         pegou = personagem.TestaMaca(macaRect)
+
         if pegou == 1:
             MudaMaca()
 
