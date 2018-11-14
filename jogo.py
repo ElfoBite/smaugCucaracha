@@ -67,8 +67,8 @@ def Jogar():
 
     while True:
 
-        s += 1
-        segundo = s/60
+        maca.tick += 1
+        maca.segundo = maca.tick/60
 
         personagem.x += personagem.moveX
         personagem.y += personagem.moveY
@@ -77,10 +77,10 @@ def Jogar():
 
         pegou = personagem.TestaMaca(maca.rect)
         if pegou == 1:
-           s, teste = maca.Muda(fase=teste, tileY=tileY, tileX=tileX)
+           teste = maca.Muda(fase=teste, tileY=tileY, tileX=tileX)
 
-        if segundo >= 5:
-           s, teste = maca.Muda(fase=teste, tileY=tileY, tileX=tileX)
+        if maca.segundo >= 5:
+           teste = maca.Muda(fase=teste, tileY=tileY, tileX=tileX)
 
         tela.blit(fundo, (0, 0))
         tela.blit(maca.img, (maca.x, maca.y))
@@ -100,13 +100,13 @@ def Jogar():
                 if event.key == pygame.K_DOWN:
                     personagem.AndaBaixo()
 
-            if event.type == pygame.KEYUP:
-                if event.key == pygame.K_LEFT:
-                    personagem.ParaX()
-                if event.key == pygame.K_RIGHT:
-                    personagem.ParaX()
-                if event.key == pygame.K_UP:
-                    personagem.ParaY()
-                if event.key == pygame.K_DOWN:
-                    personagem.ParaY()
+#            if event.type == pygame.KEYUP:
+#                if event.key == pygame.K_LEFT:
+#                    personagem.ParaX()
+#                if event.key == pygame.K_RIGHT:
+#                    personagem.ParaX()
+#                if event.key == pygame.K_UP:
+#                    personagem.ParaY()
+#                if event.key == pygame.K_DOWN:
+#                    personagem.ParaY()
         fps.tick(60)

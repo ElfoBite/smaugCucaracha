@@ -2,12 +2,14 @@ import pygame
 import random
 
 class Maca(object):
+    tick = 600
     x = 0
     y = 0
     img = pygame.image.load('img/maca.jpg')
     rect = pygame.Rect(0, 0, 0, 0)
     tileX = 0
     tileY = 0
+    segundo = 0
 
     def __init__(self, tileX, tileY):
         self.tileX = tileX
@@ -36,5 +38,5 @@ class Maca(object):
                 self.y = self.y * tileY
 
                 self.rect = pygame.Rect(self.x, self.y, tileX, tileY)
-
-            return 0, fase
+                self.tick = 0
+                return fase
