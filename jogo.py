@@ -17,7 +17,7 @@ teste = [[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
          [1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-         [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1],
          [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1],
          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1,  1],
@@ -28,20 +28,22 @@ teste = [[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
          [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1],
          [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1]]
 
-maca = pygame.image.load('img/maca.jpg')
-maca = pygame.transform.scale(maca, (40, 40))
-s = 0
-muros = []
-x, y = 0, 0
-macaRect = pygame.Rect(0, 0, 0, 0)
-yMaca = 0
-xMaca = 0
-
 telaLargura = 1024
 telaAltura = 768
 
 tileX = telaLargura / 32
 tileY = telaAltura / 23
+
+maca = pygame.image.load('img/maca.jpg')
+maca = pygame.transform.scale(maca, (tileX, tileY))
+macaRect = pygame.Rect(0, 0, 0, 0)
+yMaca = 0
+xMaca = 0
+
+muros = []
+x, y = 0, 0
+
+s = 0
 
 personagem = Personagem(telaLargura, telaAltura)
 
@@ -53,8 +55,7 @@ fundo = pygame.transform.scale(fundo, (telaLargura, telaAltura))
 for i in teste:
     x = 0
     for j in i:
-        if not (muros):
-            if j == 1:
+        if j == 1:
                 muros.append(pygame.Rect(x, y, tileX, tileY))
         x += tileX
     y += tileY
