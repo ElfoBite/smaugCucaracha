@@ -8,7 +8,7 @@ class Personagem(object):
     altura = 25
     moveX = 0
     moveY = 0
-    velocidade = 10
+    velocidade = 6
 
     ativo = pygame.image.load('img/Cockroach Type 1 Color 1 Move 1.png')
     direita = pygame.transform.scale(ativo, (largura, altura))
@@ -62,7 +62,6 @@ class Personagem(object):
 
 
     def rect(self):
-        print (self.ativo.get_size())
         return pygame.Rect((self.x, self.y), self.ativo.get_size())
 
     def TestaMuro(self, muros):
