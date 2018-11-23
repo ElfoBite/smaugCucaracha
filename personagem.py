@@ -1,11 +1,11 @@
 import pygame
 
 class Personagem(object):
-
+    ponto = 50
     x = 0
     y = 0
-    largura = 60
-    altura = 25
+    largura = 30
+    altura = 30
     moveX = 0
     moveY = 0
     velocidade = 6
@@ -21,8 +21,8 @@ class Personagem(object):
     ativo = direita
 
     def __init__(self, altura, largura):
-        self.x = altura/2
-        self.y = largura/2
+        self.x = altura/2-50
+        self.y = largura/2-50
 
     def AndaDireita(self):
         self.moveX = self.velocidade
@@ -72,5 +72,12 @@ class Personagem(object):
 
     def TestaMaca(self,maca):
             if self.rect().colliderect(maca):
+                self.ponto += 5
+                return 1
+            return 0
+
+    def TestaMacaPodre(self,maca):
+            if self.rect().colliderect(maca):
+                self.ponto -= 10
                 return 1
             return 0
