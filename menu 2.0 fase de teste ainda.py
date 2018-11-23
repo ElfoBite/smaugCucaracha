@@ -1,11 +1,23 @@
 import pygame, sys, os,text
 from gameManager import CloseWindow
 from gameManager import Gerenciador
+import new1 import new1 
+
+
+titulo = "Carrera de la Cucaracha"
+telaLargura = 1024
+telaAltura = 768
+branco = (255,255,255)
+
+pygame.init()
+
+pygame.display.set_caption(titulo)
+tela = pygame.display.set_mode((telaLargura, telaAltura), 0, 32)
 
 pygame.mixer.init()
 
 #==================== controla a troca de imagens do menu =====================
-telas = []
+telas = ['img/fundo.png', 'img/quarto.PNG', 'img/loja.png', ]
 telaAtual = 0
 podeTrocar = True
 # ==============================================================================
@@ -23,13 +35,21 @@ Cancel = os.path.join()
 CancelSound = pygame.mixer.Sound(Cancel)
 #CancelSound.set_volume(2.0)
 
-BackSound = os.path.join()
+BackSound = os.path.join('Sons/La-Cucaracha.mp3')
 MenuBackS = pygame.mixer.Sound(BackSound)
 MenuBackS.set_volume(0.2)
 
+
+#ajustaimagem   da telas para plano definido.
+#=============================================================================
+def ajustaimagem(img):
+    global largura, altura, fundo
+    telas = pygame.image.load(img)
+    telas = pygame.transform.scale(fundo, (telaLargura, telaAltura))
+
 # =============================================================================
 
-
+# evento e troca imagens cenarios pré estabelecidos
 def trocarMenu():
 	global telaAtual, podeTrocar,MoveSound,SelectSound,CancelSound,MenuBackS
 
@@ -92,18 +112,38 @@ def Menu(tela):
 		MenuBackS.play(-1)
 		audio = True
 
-	caminhoMenu = os.path.join('menu_imgs',telas[telaAtual])
+	caminhoMenu = os.path.join('quarto.PNG',telas[telaAtual])
 	imgMenu = pygame.image.load(caminhoMenu)
 
 	tela.blit(imgMenu,(0,0))
 
 	if telaAtual != 4:
-		text.ExibirTexto(tela,'Press SPACE to select.',235,570,15)
-	else:
-		text.ExibirTexto(tela,'Press ESC to back.',270,570,15)
+		text.ExibirTexto(tela,'Press SPACE to select.',0,0,0)
+	elif
+		text.ExibirTexto(tela,'Press ESC to back.',0,0,0)
+	elif
+		text.ExibirTexto(tela,' Press ENTER to start.', 0,0,0)#
 
 	CloseWindow()
 
 	trocarMenu()
+	
+	
+def game_intro():
+    gameintro = True
+    while gameintro:
+        screen.blit(Menu, (0, 0))
+        keys = pg.key.get_pressed()
+        for event in pg.event.get():
+            if keys[pg.K_j]:
+                gameintro = False
+            elif keys[pg.K_t]:  # apertar T para tto
+                gameintro = False
+            elif keys[pg.K_i]:  # apertar I de intro
+                game_story()
+        pg.display.update()
+
+def game_story():
+    pass
 
 	pygame.display.flip()
