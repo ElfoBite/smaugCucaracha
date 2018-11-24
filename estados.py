@@ -26,6 +26,7 @@ while True:
         pass
         #Pause
     elif estado == 6:
+        pygame.quit()
         exit()
     elif estado == 7:
         estado = GameOver()

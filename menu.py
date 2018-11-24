@@ -31,7 +31,7 @@ def TelaInicial():
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()
+                return 6
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
                     return 1
@@ -47,7 +47,7 @@ def Menu():
         pygame.display.update()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()
+                return 6
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_1:
                     return 2
@@ -63,7 +63,7 @@ def Loja():
         pygame.display.update()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()
+                return 6
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     return 1
