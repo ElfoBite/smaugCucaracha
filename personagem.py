@@ -44,10 +44,8 @@ class Personagem(object):
         self.moveX = 0
         self.ativo = self.baixo
 
-    def ParaX(self):
+    def Para(self):
         self.moveX = 0
-
-    def ParaY(self):
         self.moveY = 0
 
     def TestaLimiteDaTela(self,largura,altura):
@@ -66,8 +64,8 @@ class Personagem(object):
     def TestaMuro(self, muros):
         for muro in muros:
             if self.rect().colliderect(muro):
-                self.x -= self.moveX
-                self.y -= self.moveY
+                self.x -= self.moveX*2
+                self.y -= self.moveY*2
 
     def TestaMaca(self,maca):
             if self.rect().colliderect(maca):

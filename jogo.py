@@ -40,13 +40,16 @@ def RenderisaPontos(pontos):
     return imgPontos
 
 def MudaFase(n):
-    global Nfase, teste, muros, personagem
+    global Nfase, teste, muros, personagem, maca, macaPodre
     personagem.x = 50
     personagem.y = 50
+    personagem.Para()
     muros = []
     Nfase = n
     teste = abreFase(faseCaminho + str(Nfase))
     AtualizaMuros(teste)
+    teste = maca.Muda(fase=teste, tileY=tileY, tileX=tileX)
+    teste = macaPodre.Muda(fase=teste, tileY=tileY, tileX=tileX)
 
 
 def Jogar():
@@ -91,7 +94,7 @@ def Jogar():
 
         if personagem.ponto >= 100 and Nfase == 1:
             MudaFase(2)
-            return 2
+            return 1
 
         tela.blit(fundo, (0, 0))
         tela.blit(maca.img, (maca.x, maca.y))
