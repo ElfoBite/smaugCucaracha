@@ -60,6 +60,7 @@ def Jogar():
     tick = 0
 
     while True:
+
         tick += 1
         maca.tick += 1
         maca.segundo = maca.tick/60
@@ -114,6 +115,10 @@ def Jogar():
                     personagem.AndaBaixo()
                 if event.key == pygame.K_ESCAPE:
                     return 1
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                for muro in muros:
+                    if muro.collidepoint(pygame.mouse.get_pos()):
+                        print("clicado no muro")
 
         pygame.display.update()
 
