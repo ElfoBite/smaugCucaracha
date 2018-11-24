@@ -3,10 +3,12 @@ from personagem import Personagem
 from maca import Maca
 from fase import abreFase
 faseCaminho = 'Cenarios/fase'
-fase = 1
+Nfase = 1
 teste = []
 telaLargura = 960
 telaAltura = 690
+
+teste = abreFase(faseCaminho + str(Nfase))
 
 tileX = int(telaLargura / 32)
 tileY = int(telaAltura / 23)
@@ -15,14 +17,14 @@ muros = []
 maca = Maca(tileX, tileY, 0)
 macaPodre = Maca(tileX, tileY, 1)
 
-personagem = Personagem(telaLargura, telaAltura)
+personagem = Personagem(50, 50)
 
 fps = pygame.time.Clock()
 tela = pygame.display.set_mode((telaLargura, telaAltura), pygame.DOUBLEBUF, 32)
 font = pygame.font.Font('img/TlwgTypist-Bold.ttf', 25)
 
 def AtualizaMuros(fase):
-    global muros, tileX, tileY
+    global muros, tileX, tileY, teste, Nfase
     y = 0
     for i in fase:
         x = 0
@@ -37,10 +39,20 @@ def RenderisaPontos(pontos):
     imgPontos = font.render(texto, True, (255, 255, 255))
     return imgPontos
 
+def MudaFase(n):
+    global Nfase, teste, muros, personagem
+    personagem.x = 50
+    personagem.y = 50
+    muros = []
+    Nfase = n
+    teste = abreFase(faseCaminho + str(Nfase))
+    AtualizaMuros(teste)
+
+
 def Jogar():
-    global s, tela, personagem, maca, macaPodre, teste, fase
-    teste = abreFase(faseCaminho+str(fase))
-    fundo = pygame.image.load('Cenarios/fase'+str(fase)+'.png')
+    global s, tela, personagem, maca, macaPodre, teste, Nfase
+
+    fundo = pygame.image.load('Cenarios/fase'+str(Nfase)+'.png')
     fundo = pygame.transform.scale(fundo, (telaLargura, telaAltura))
     AtualizaMuros(teste)
     s = 600
@@ -76,6 +88,10 @@ def Jogar():
 
         if personagem.ponto < 0:
             return 7
+
+        if personagem.ponto >= 100 and Nfase == 1:
+            MudaFase(2)
+            return 2
 
         tela.blit(fundo, (0, 0))
         tela.blit(maca.img, (maca.x, maca.y))

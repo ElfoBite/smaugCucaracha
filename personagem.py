@@ -20,9 +20,9 @@ class Personagem(object):
 
     ativo = direita
 
-    def __init__(self, altura, largura):
-        self.x = altura/2-50
-        self.y = largura/2-50
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
 
     def AndaDireita(self):
         self.moveX = self.velocidade
@@ -59,7 +59,6 @@ class Personagem(object):
             self.x = largura - self.largura
         if self.y > altura - self.largura:
             self.y = altura - self.largura
-
 
     def rect(self):
         return pygame.Rect((self.x, self.y), self.ativo.get_size())

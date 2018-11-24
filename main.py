@@ -1,48 +1,32 @@
-#daniel da costa ruy
-#inicio projeto menu a modo daniel
-#pratica de python/estudo para programação e evolução na minha carreira.
-#Projeto Smaug Fatec 2018-carapicuiba- 2ºciclo.
-#===============================================================================#
-
-#importação da biblioteca pygame
 import pygame
-import sys
-import game
-
-
-# iniciamos o modulo pygame
-pygame.init()
+from menu import TelaInicial, Menu, Loja
+from jogo import Jogar, GameOver
 
 try:
-    # o nosso jogo
-    meu_game = game.Game(title="Carreira de la cucaracha", fullscreen=False, width=800, height=600)
+    pygame.init()
+except:
+    print("O modulo pygame não foi iniciado com sucesso")
 
-    # carregamos os recursos necessarios ao jogo
-    meu_game.load_content()
-    # Iniciamos o loop do jogo
-    # Aqui vamos desenhar tudo e atualizar o nosso jogo
-    while meu_game.running:
-        # Obtemos os eventos SDL
-        events = pygame.event.get()
-        for event in events:
-            # Se clicarmos no X para fechar a janela
-            if event.type == pygame.QUIT:
-                meu_game.running = False  # Finalizamos o loop
-            # agora damos um update e um draw no nosso jogo
-        meu_game.update()
-        meu_game.draw()
+estado = 0
 
-# aqui vamos tratar das excepcoes do nosso codigo
-except Exception as ex:
-    print(ex.message)
-
-
-finally:
-
-    # caso aconteca algum erro,
-    # limpamos os recursos
-    # e saimos do processo
-    if meu_game:
-        meu_game.unload_content()
-    pygame.quit()
+while True:
+    print(estado)
+    if estado == 0:
+        estado = TelaInicial()
+    elif estado == 1:
+        estado = Menu()
+    elif estado == 2:
+        estado = Jogar()
+    elif estado == 3:
+        pass
+        #configuração
+    elif estado == 4:
+        estado = Loja()
+    elif estado == 5:
+        pass
+        #Pause
+    elif estado == 6:
+        exit()
+    elif estado == 7:
+        estado = GameOver()
 
