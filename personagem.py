@@ -9,6 +9,7 @@ class Personagem(object):
     moveX = 0
     moveY = 0
     velocidade = 6
+    fase = 1
 
     ativo = pygame.image.load('img/Cockroach Type 1 Color 1 Move 1.png')
     direita = pygame.transform.scale(ativo, (largura, altura))
@@ -69,12 +70,12 @@ class Personagem(object):
 
     def TestaMaca(self,maca):
             if self.rect().colliderect(maca):
-                self.ponto += 500
+                self.ponto += 5
                 return 1
             return 0
 
     def TestaMacaPodre(self,maca):
             if self.rect().colliderect(maca):
-                self.ponto -= 10
+                self.ponto -= 10*self.fase
                 return 1
             return 0

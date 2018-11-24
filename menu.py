@@ -53,6 +53,7 @@ def Menu():
                     return 2
                 if event.key == pygame.K_2:
                     return 4
+
 def Loja():
     global fundo
     ajustaimagem('img/loja.png')
