@@ -22,11 +22,12 @@ def TelaInicial():
     global fundo
     pygame.mixer.music.play(-1)
     ajustaimagem('img/fundo.png')
+    font = pygame.font.Font('img/TlwgTypist-Bold.ttf', 30)
+    continuar = font.render("Aperte ENTER", True, (0, 0, 0))
 
     while True:
-
-        pygame.display.update()
         tela.blit(fundo, (0, 0))
+        tela.blit(continuar, (500, 500))
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -34,6 +35,8 @@ def TelaInicial():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
                     return 1
+        pygame.display.update()
+
 def Menu():
     global fundo
     pygame.mixer.music.play(-1)
@@ -47,12 +50,10 @@ def Menu():
                 pygame.quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_1:
-                    pygame.mixer_music.stop()
                     return 2
                 if event.key == pygame.K_2:
                     return 4
 def Loja():
-
     global fundo
     ajustaimagem('img/loja.png')
 

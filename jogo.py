@@ -122,9 +122,13 @@ def Jogar():
         fps.tick(60)
 
 def GameOver():
-    font = pygame.font.Font('img/TlwgTypist-Bold.ttf', 70)
-    gameOvertxt = font.render("GAME OVER", True, (0, 0, 0))
-    tela.blit(gameOvertxt, (300, 300))
+    global Nfase, personagem
+    fontGameOver = pygame.font.Font('img/TlwgTypist-Bold.ttf', 90)
+    font = pygame.font.Font('img/TlwgTypist-Bold.ttf', 30)
+    gameOvertxt = fontGameOver.render("GAME OVER", True, (0, 0, 0))
+    gameOverContinueTxt = font.render("Aperte ESC para iniciar um novo jogo", True, (0, 0, 0))
+    tela.blit(gameOvertxt, (250, 200))
+    tela.blit(gameOverContinueTxt, (170, 400))
     pygame.display.update()
     while True:
         for event in pygame.event.get():
@@ -132,4 +136,6 @@ def GameOver():
                 return 6
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    return 6
+                    MudaFase(1)
+                    personagem = Personagem(50, 50)
+                    return 1

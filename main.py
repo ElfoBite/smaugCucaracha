@@ -32,7 +32,7 @@ try:
         meu_game.update()
         meu_game.draw()
 
-# aqui vamos tratar das excepcoes do nosso codigo
+# aqui vamos tratar das excecoes do nosso codigo
 except Exception as ex:
     print(ex.message)
 

@@ -4,8 +4,8 @@ class Personagem(object):
     ponto = 50
     x = 0
     y = 0
-    largura = 30
-    altura = 30
+    largura = 25
+    altura = 25
     moveX = 0
     moveY = 0
     velocidade = 6
@@ -64,12 +64,12 @@ class Personagem(object):
     def TestaMuro(self, muros):
         for muro in muros:
             if self.rect().colliderect(muro):
-                self.x -= self.moveX*2
-                self.y -= self.moveY*2
+                self.x -= self.moveX
+                self.y -= self.moveY
 
     def TestaMaca(self,maca):
             if self.rect().colliderect(maca):
-                self.ponto += 5
+                self.ponto += 500
                 return 1
             return 0
 

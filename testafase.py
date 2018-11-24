@@ -4,11 +4,12 @@ from fase import abreFase
 pygame.init()
 telaLargura = 960
 telaAltura = 690
-img = 'Cenarios/fase2.png'
+fase = 2
+img = 'Cenarios/fase'+str(fase)+'.png'
 
 tela = pygame.display.set_mode((telaLargura, telaAltura), pygame.DOUBLEBUF, 32)
 
-fase = abreFase('Cenarios/fase2')
+fase = abreFase('Cenarios/fase'+str(fase))
 
 tileX = int(telaLargura / 32)
 tileY = int(telaAltura / 23)
