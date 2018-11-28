@@ -4,8 +4,9 @@ from maca import Maca
 from fase import abreFase
 faseCaminho = 'Cenarios/fase'
 Nfase = 1
-telaLargura = 960
-telaAltura = 690
+telaLargura = 1024
+telaAltura = 768
+preto = (255, 255, 255)
 
 tileX = int(telaLargura / 32)
 tileY = int(telaAltura / 23)
@@ -20,7 +21,6 @@ teste = abreFase(faseCaminho + str(personagem.fase))
 
 fps = pygame.time.Clock()
 tela = pygame.display.set_mode((telaLargura, telaAltura), pygame.DOUBLEBUF, 32)
-font = pygame.font.Font('img/TlwgTypist-Bold.ttf', 25)
 
 def AtualizaMuros(fase):
     global muros, tileX, tileY, teste
@@ -34,12 +34,15 @@ def AtualizaMuros(fase):
         y += tileY
 
 def RenderisaPontos(pontos):
+    font = pygame.font.Font('fontes/TlwgTypist-Bold.ttf', 25)
     texto = "Pontos: " + str(pontos)
-    imgPontos = font.render(texto, True, (255, 255, 255))
+    imgPontos = font.render(texto, True, preto)
     return imgPontos
 
 def MudaFase(n):
     global teste, muros, personagem, maca, macaPodre
+    font = pygame.font.Font('fontes/TlwgTypist-Bold.ttf', 25)
+    nomeFase = ('1. Sala', '2. Cozinha', '3. Banheiro', '4. Escritorio', '5. Jardim')
     personagem.x = 50
     personagem.y = 50
     personagem.Para()
@@ -49,16 +52,33 @@ def MudaFase(n):
     AtualizaMuros(teste)
     teste = maca.Muda(fase=teste, tileY=tileY, tileX=tileX)
     teste = macaPodre.Muda(fase=teste, tileY=tileY, tileX=tileX)
-
+    while True:
+        imgFase = font.render(nomeFase[n-1], True, preto)
+        imgContinue = font.render("Aperte ENTER para CONTINUAR", True, preto)
+        imgMenu = font.render("Aperte ESC para voltar ao MENU", True, preto)
+        tela.fill((0, 0 ,0))
+        tela.blit(imgFase, (400, 350))
+        tela.blit(imgContinue, (0, 650))
+        tela.blit(imgMenu, (0, 670))
+        pygame.display.update()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                return 6
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    return 1
+                if event.key == pygame.K_RETURN:
+                    return 0
 def Jogar():
     global s, tela, personagem, maca, macaPodre, teste, Nfase
-
+    font = pygame.font.Font('fontes/TlwgTypist-Bold.ttf', 25)
     fundo = pygame.image.load('Cenarios/fase'+str(personagem.fase)+'.png')
     fundo = pygame.transform.scale(fundo, (telaLargura, telaAltura))
     AtualizaMuros(teste)
     s = 600
     tick = 0
-
+    segundos = 120
+    imgSegundos = font.render('Tempo:'+str(segundos),True, preto)
     while True:
 
         tick += 1
@@ -73,7 +93,8 @@ def Jogar():
         personagem.TestaMuro(muros)
 
         if tick >= 60:
-            personagem.ponto -= 1
+            segundos -= 1
+            imgSegundos = font.render('Tempo:' + str(segundos), True, preto)
             tick = 0
 
         if personagem.TestaMaca(maca.rect):
@@ -88,14 +109,26 @@ def Jogar():
         if macaPodre.segundo >= 5:
            teste = macaPodre.Muda(fase=teste, tileY=tileY, tileX=tileX)
 
-        if personagem.ponto < 0:
+        if personagem.ponto < 0 or segundos == 0:
             return 7
-
+        if personagem.fase == 0:
+            if MudaFase(1):
+                return 1
         if personagem.ponto >= 100 and personagem.fase == 1:
-            MudaFase(2)
+            if MudaFase(2):
+                return 1
+        if personagem.ponto >= 200 and personagem.fase == 2:
+            if MudaFase(3):
+                return 1
+        if personagem.ponto >= 400 and personagem.fase == 3:
+            MudaFase(4)
+        if personagem.ponto >= 800 and personagem.fase == 4:
+            MudaFase(5)
+        if personagem.ponto >= 1600 and personagem.fase == 5:
             return 1
 
         tela.blit(fundo, (0, 0))
+        tela.blit(imgSegundos, (200, 0))
         tela.blit(maca.img, (maca.x, maca.y))
         tela.blit(macaPodre.img, (macaPodre.x, macaPodre.y))
         tela.blit(personagem.ativo, (personagem.x, personagem.y))
