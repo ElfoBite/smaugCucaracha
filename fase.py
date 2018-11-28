@@ -1,10 +1,11 @@
+from compressfases import descomprime
 def abreFase(fase):
-    arquivo = open(fase)
+    arquivo = descomprime(fase)
     teste = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []]
     y = 0
     for i in arquivo:
-        for j in i:
-            if not(j == '\n'):
-                teste[y].append(int(j))
-        y += 1
+        if not(i == '\n'):
+            teste[y].append(int(i))
+        else:
+            y += 1
     return teste

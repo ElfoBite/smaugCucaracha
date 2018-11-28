@@ -17,7 +17,7 @@ macaPodre = Maca(tileX, tileY, 1)
 
 personagem = Personagem(50, 50)
 
-teste = abreFase(faseCaminho + str(personagem.fase))
+teste = abreFase(personagem.fase)
 
 fps = pygame.time.Clock()
 tela = pygame.display.set_mode((telaLargura, telaAltura), pygame.DOUBLEBUF, 32)
@@ -48,7 +48,7 @@ def MudaFase(n):
     personagem.Para()
     muros = []
     personagem.fase = n
-    teste = abreFase(faseCaminho + str(personagem.fase))
+    teste = abreFase(personagem.fase)
     AtualizaMuros(teste)
     teste = maca.Muda(fase=teste, tileY=tileY, tileX=tileX)
     teste = macaPodre.Muda(fase=teste, tileY=tileY, tileX=tileX)
