@@ -54,6 +54,8 @@ def Menu():
                     return 2
                 if event.key == pygame.K_2:
                     return 4
+                if event.key == pygame.K_0:
+                    return 6
 
 def Loja():
     global fundo

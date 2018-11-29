@@ -58,5 +58,4 @@ def descomprime(n):
             ch += dicionario[l]
     return ch
 
-for i in range(3):
     comprime(i)

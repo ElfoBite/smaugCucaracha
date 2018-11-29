@@ -40,7 +40,7 @@ def RenderisaPontos(pontos):
     return imgPontos
 
 def MudaFase(n):
-    global teste, muros, personagem, maca, macaPodre
+    global teste, muros, personagem, maca, macaPodre,fundo
     font = pygame.font.Font('fontes/TlwgTypist-Bold.ttf', 25)
     nomeFase = ('1. Sala', '2. Cozinha', '3. Banheiro', '4. Escritorio', '5. Jardim')
     personagem.x = 50
@@ -48,6 +48,8 @@ def MudaFase(n):
     personagem.Para()
     muros = []
     personagem.fase = n
+    fundo = pygame.image.load('Cenarios/fase'+str(personagem.fase)+'.png')
+    fundo = pygame.transform.scale(fundo, (telaLargura, telaAltura))
     teste = abreFase(personagem.fase)
     AtualizaMuros(teste)
     teste = maca.Muda(fase=teste, tileY=tileY, tileX=tileX)
@@ -72,8 +74,6 @@ def MudaFase(n):
 def Jogar():
     global s, tela, personagem, maca, macaPodre, teste, Nfase
     font = pygame.font.Font('fontes/TlwgTypist-Bold.ttf', 25)
-    fundo = pygame.image.load('Cenarios/fase'+str(personagem.fase)+'.png')
-    fundo = pygame.transform.scale(fundo, (telaLargura, telaAltura))
     AtualizaMuros(teste)
     s = 600
     tick = 0
