@@ -70,7 +70,7 @@ class Personagem(object):
 
     def TestaMaca(self,maca):
             if self.rect().colliderect(maca):
-                self.ponto += 5
+                self.ponto += 10
                 return 1
             return 0
 
